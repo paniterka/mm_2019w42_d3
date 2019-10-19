@@ -9,6 +9,7 @@ var svg = d3.select("#my_dataviz")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
+  .style("position", "relative")
 .append("g")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
@@ -91,9 +92,10 @@ svg.append("g")
   }
   var mousemove = function(d) {
     tooltip
-      .html("Finish time: " + d.Time)
-      .style("left", (d3.mouse(this)[0]) + "px")
-      .style("top", (d3.mouse(this)[1]) + "px")
+      .html(d.Athlete + ", " + Math.round(d.Year) + "<br />Finish time: " + d.Time)
+      .style("left", (d3.mouse(this)[0]+margin.left+30) + "px")
+      .style("top",  (d3.mouse(this)[1]+margin.top-30)+ "px")
+      .style("position", "absolute")
   }
   var mouseleave = function(d) {
     tooltip
