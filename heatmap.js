@@ -1,6 +1,8 @@
+var parentDiv = document.getElementById("chart");
+var vizx = parentDiv.clientWidth;
+var vizy = parentDiv.clientWidth;
+
 var margin = {top: 80, right: 25, bottom: 30, left: 100},
-    vizx = 600,
-    vizy = 600,
     width = vizx - margin.left - margin.right,
     height = vizy - margin.top - margin.bottom;
 
@@ -40,6 +42,7 @@ d3.csv("athletes_year_f2.csv", function(data) {
         .padding(xy_padding);
     svg.append("g")
         .style("font-size", 10)
+        .style("font-family", "inherit")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x)
             .tickSize(0)
@@ -59,6 +62,7 @@ d3.csv("athletes_year_f2.csv", function(data) {
         .padding(xy_padding);
     svg.append("g")
         .style("font-size", 10)
+        .style("font-family", "inherit")
         .call(d3.axisLeft(y).tickSize(0))
         .select(".domain").remove()
 

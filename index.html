@@ -1,16 +1,36 @@
+<head>
 <!-- Code from d3-graph-gallery.com -->
 <!DOCTYPE html>
-<meta charset="utf-8">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="main.css">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
-<!-- <link rel="stylesheet" href="main.css"> -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet"> -->
 
-<div id="chart"></div>
-<div id="controls">
-    <button type="button" id="button_step0" onclick="redrawChart()">Reset chart</button>
-    <button type="button" id="button_step1" onclick="showQueens()">Show queens</button>
-    <button type="button" id="button_step2" onclick="showLottery()">Show lottery wins</button>
-    </div>
+</head>
 
+
+<body>
+
+<div class="wrapper">
+	<div id="chart"></div>
+	<div id="controls">
+		<div class="story">
+			<div class="story_step">
+			<button type="button" id="button_step0" onclick="redrawChart()">Show medals</button>
+			<p>This shows the medals. This shows the medals. This shows the medals. This shows the medals. Bla.</p>
+			</div>
+			<div class="story_step">
+			<button type="button" id="button_step1" onclick="showQueens()">Show the queens</button>
+			<p>This shows the awesome sportswomen who won gold many times</p>
+			</div>
+			<div class="story_step">
+			<button type="button" id="button_step2" onclick="showLottery()">Show the lottery influence</button>
+			<p>Not everyone knows that the participation in Ironman competition is determined by the lottery. </p>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -49,3 +69,5 @@
 		</div>
 	</div>
 </section> -->
+
+</body>
