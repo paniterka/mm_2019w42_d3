@@ -150,7 +150,6 @@ d3.csv("athletes_year_f2.csv", function(data) {
 
 
 function drawMedals(){
-    console.log('bla')
 
 svg.selectAll(".heatmap-tiles")
     .filter(function(d) { return d.Place_no > 0; })
@@ -167,24 +166,25 @@ svg.selectAll(".heatmap-tiles")
         .ease(d3.easeElasticOut)
 }
 
-
+var rectangles_queens;
 function showQueens(){
 
     d3.csv("queens2.csv", function(data) {
 
-        var rectangles_queens = svg.selectAll()
+        rectangles_queens = svg.selectAll()
             .data(data)
             .enter()
             .append("rect")
                 .attr("x", function(d) { return x(d.x) })
                 .attr("y", function(d) { return y(d.y) })
-                .attr("height", 1.05*y.bandwidth())
+                .attr("height", 1.0*y.bandwidth())
                 .attr("width", 0)
                 .style('fill', 'none')
                 .attr('stroke', 'black')
                 .attr('stroke-width', 0.5)
                 .attr("rx", 1)
                 .attr("ry", 1)
+                .attr("class", "rectangles_queens")
             .transition()
                 .delay(function(d,i){ return 300*i; }) 
                 .duration(300)
@@ -194,7 +194,41 @@ function showQueens(){
     })
 }
 
+var rectangles_absences;
+function showLottery(){
+
+    d3.csv("queens_absences.csv", function(data) {
+
+        rectangles_absences = svg.selectAll()
+            .data(data)
+            .enter()
+            .append("rect")
+                .attr("x", function(d) { return x(d.x) })
+                .attr("y", function(d) { return y(d.y) })
+                .attr("height", 0)
+                .attr("width", 1.0*x.bandwidth())
+                .style('fill', 'none')
+                .attr('stroke', 'black')
+                .attr('stroke-width', 0.5)
+                .attr("rx", 1)
+                .attr("ry", 1)
+                .attr("class", "rectangles_absences")
+            .transition()
+                .delay(function(d,i){ return 1500*i; }) 
+                .duration(300)
+                .attr("height", function(d) { return y(d.end_athlete)-y(d.y)+y.bandwidth()})
+
+
+    })
+
+}
+
+
 function deleteChart(){
     svg.selectAll("*").remove()
+}
 
+
+function deleteElement(element){
+    svg.selectAll(element).remove()
 }
