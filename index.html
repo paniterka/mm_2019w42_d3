@@ -2,12 +2,50 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
+<!-- <link rel="stylesheet" href="main.css"> -->
+
+<div id="chart"></div>
+<div id="controls">
+    <button type="button" id="button_step0" onclick="redrawChart()">Reset chart</button>
+    <button type="button" id="button_step1" onclick="showQueens()">Show queens</button>
+    <button type="button" id="button_step2" onclick="showLottery()">Show lottery wins</button>
+    </div>
+
+
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
 <!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
 <!-- Load color palettes -->
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <script src="heatmap.js"></script>
+
+<!-- <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+<script src="https://unpkg.com/scrollama"></script>
+<script src="scrollolo.js"></script> -->
+
+
+
+<!-- <section id='scroll'>
+	<div class='scroll__graphic'>
+        <div id="chart"></div>
+	</div>
+
+	<div class='scroll__text'>
+		<div class='step' data-step='1'>
+            <p>STEP 1</p>
+            <p> The Ironman World Championship has been held annually in Hawaii since 1978, with an additional race in 1982. It is owned and organized by the World Triathlon Corporation. It is the annual culmination of a series of Ironman triathlon qualification races held throughout the world. [Wiki]</p>
+		</div>
+		<div class='step' data-step='2'>
+            <p>STEP 2</p>
+            <p>Until 2015, individuals could enter a lottery for the chance to participate in the Ironman World Championship. The lottery entry fee was $50 and afforded the chance to win one of 100 berths in the championship race. If selected the winners then had to pay the normal entry fee.[14] [Wiki]</p>
+		</div>
+		<div class='step' data-step='3'>
+			<p>STEP 3</p>
+		</div>
+		<div class='step' data-step='4'>
+			<p>STEP 4</p>
+		</div>
+	</div>
+</section> -->
