@@ -2,7 +2,7 @@ var parentDiv = document.getElementById("chart");
 var vizx = parentDiv.clientWidth;
 var vizy = parentDiv.clientWidth;
 
-var margin = {top: 80, right: 25, bottom: 30, left: 100},
+var margin = {top: 120, right: 25, bottom: 30, left: 100},
     width = vizx - margin.left - margin.right,
     height = vizy - margin.top - margin.bottom;
 
@@ -16,6 +16,28 @@ var svg = d3.select("#chart")
             .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
 
+
+// // Add title to graph
+// svg.append("text")
+//         .attr("x", 0)
+//         .attr("y", -80)
+//         .attr("text-anchor", "left")
+//         .style("font-size", "28px")
+//         .style("font-weight", "bold")
+//         .text("Ironman World Championship");
+
+// // Add subtitle to graph
+// svg.append("text")
+//         .attr("x", 0)
+//         .attr("y", -40)
+//         .attr("text-anchor", "left")
+//         .style("font-size", "20px")
+//         // .style("fill", "grey")
+//         // .style("font-weight", "bold")
+//         .style("max-width", 400)
+//         .text("Game of skill - game of chance");
+
+
 var x;
 var y;
 var myColor = {
@@ -24,14 +46,16 @@ var myColor = {
     "2.0": "silver", 
     "3.0": "peru"
     };
+var myGroups;
+var myVars;
 
-
+function drawChart(){
 d3.csv("athletes_year_f2.csv", function(data) {
 
         // console.log(data)
     // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
-    var myGroups = d3.map(data, function(d){return d.Year;}).keys()
-    var myVars = d3.map(data, function(d){return d.Athlete;}).keys()
+    myGroups = d3.map(data, function(d){return d.Year;}).keys()
+    myVars = d3.map(data, function(d){return d.Athlete;}).keys()
 
     var xy_padding = 0.15; 
 
@@ -121,48 +145,56 @@ d3.csv("athletes_year_f2.csv", function(data) {
         .on("mouseleave", mouseleave)
 }
 )
+}
 
 
 
-// Add title to graph
-svg.append("text")
-        .attr("x", 0)
-        .attr("y", -50)
-        .attr("text-anchor", "left")
-        .style("font-size", "22px")
-        .text("Ironman World Championship");
-
-// Add subtitle to graph
-svg.append("text")
-        .attr("x", 0)
-        .attr("y", -20)
-        .attr("text-anchor", "left")
-        .style("font-size", "14px")
-        .style("fill", "grey")
-        .style("max-width", 400)
-        .text("Game of skill - game of chance");
-
-
-function redrawChart(){
+function drawMedals(){
     console.log('bla')
 
 svg.selectAll(".heatmap-tiles")
+    .filter(function(d) { return d.Place_no > 0; })
     .transition()
-    .delay(function(d,i){ return 2*i; }) 
-    .duration(1000)
-    .style("fill", function(d) { return myColor[d.Place_no]} )
+        .delay(function(d,i){ return 40*i; }) 
+        .duration(0)
+        .attr("width", 0)
+        .attr("height", 0)
+        .style("fill", function(d) { return myColor[d.Place_no]} )
+    .transition()
+        .duration(800)
+        .attr("width", x.bandwidth())
+        .attr("height", y.bandwidth())
+        .ease(d3.easeElasticOut)
 }
 
 
 function showQueens(){
-    var rectangle = svg.append("rect")
-                           .attr("x", 10)
-                           .attr("y", 10)
-                           .attr("width", 1.05*4*x.bandwidth())
-                           .attr("height", 1.05*y.bandwidth())
-                           .style('fill', 'none')
-                           .attr('stroke', 'black')
-                           .attr('stroke-width', 2)
-                           .attr("rx", 3)
-                           .attr("ry", 3)
+
+    d3.csv("queens2.csv", function(data) {
+
+        var rectangles_queens = svg.selectAll()
+            .data(data)
+            .enter()
+            .append("rect")
+                .attr("x", function(d) { return x(d.x) })
+                .attr("y", function(d) { return y(d.y) })
+                .attr("height", 1.05*y.bandwidth())
+                .attr("width", 0)
+                .style('fill', 'none')
+                .attr('stroke', 'black')
+                .attr('stroke-width', 0.5)
+                .attr("rx", 1)
+                .attr("ry", 1)
+            .transition()
+                .delay(function(d,i){ return 300*i; }) 
+                .duration(300)
+                .attr("width", function(d) { return x(d.end_year)-x(d.x)+x.bandwidth()})
+
+
+    })
+}
+
+function deleteChart(){
+    svg.selectAll("*").remove()
+
 }
