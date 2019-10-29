@@ -5,6 +5,10 @@ body{
 }
 
 .wrapper{
+  margin: 0 auto;
+  width: 1200px;
+  /* display: inline-block; */
+  /* text-align: center; */
 
 }
 
@@ -13,15 +17,16 @@ body{
   height: 600px;
   width: 600px;
   font-family: 'Source Sans Pro', sans-serif;
+  position: fixed;
 }
-
 
 
 #controls{
   float: left;
   position: relative;
   height: 600px;
-  width: 300px;
+  width: 600px;
+  left: 600px;
 }
 
 .story{
@@ -34,7 +39,7 @@ body{
   -webkit-transform: translate(-50%, -50%);
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
+  margin-top: 50px;
 }
 
 .story_step{
