@@ -79,6 +79,9 @@ d3.csv("athletes_year_f2.csv", function(data) {
             .attr("dy", ".15em")
             .attr("transform", "rotate(-90)")
 
+        
+
+
     // Build Y scales and axis:
     y = d3.scaleBand()
         .range([ height, 0 ])
@@ -138,11 +141,18 @@ d3.csv("athletes_year_f2.csv", function(data) {
             .style("fill", "ghostwhite")
             .style("stroke-width", 2)
             .style("stroke", "none")
-            .style("opacity", 0.8)
+            .style("opacity", 1)
             .attr("class", "heatmap-tiles")
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
+
+    svg.selectAll("*")
+        .style("opacity", 0.0)
+        .transition()
+            .duration(1000)
+            .style("opacity", 1)
+
 }
 )
 }
@@ -204,19 +214,46 @@ function showLottery(){
             .enter()
             .append("rect")
                 .attr("x", function(d) { return x(d.x) })
-                .attr("y", function(d) { return y(d.y) })
-                .attr("height", 0)
+                .attr("y", function(d) { return y(d.missing) })
+                // .attr("height", 0)
+                .attr("height", function(d) { return y.bandwidth()})
                 .attr("width", 1.0*x.bandwidth())
                 .style('fill', 'none')
                 .attr('stroke', 'black')
-                .attr('stroke-width', 0.5)
+                // .attr('stroke-width', 0.5)
+                .attr('stroke-width', 0.0)
                 .attr("rx", 1)
                 .attr("ry", 1)
                 .attr("class", "rectangles_absences")
-            .transition()
-                .delay(function(d,i){ return 1500*i; }) 
+            // .transition()
+            //     .delay(function(d,i){ return 1500*i; }) 
+            //     .duration(300)
+            //     .attr('stroke-width', 5)
+            //     .ease(d3.easeElasticOut)
+            // .transition()
+            //     .attr('stroke-width', 1)
+            // .transition()
+            //     .delay(function(d,i){ return 150*i; }) 
+            //     .duration(300)
+            //         .attr("y", function(d) { return y(d.y) })
+            //         .attr("height", function(d) { return y(d.end_athlete)-y(d.y)+y.bandwidth()})
+            //         .ease(None)
+
+
+            rectangles_absences.transition()
+                .delay(function(d,i){ return 1200*i; }) 
                 .duration(300)
-                .attr("height", function(d) { return y(d.end_athlete)-y(d.y)+y.bandwidth()})
+                .attr('stroke-width', 5)
+                .ease(d3.easeElasticOut)
+            .transition()
+                .duration(100)
+                .attr('stroke-width', 1)
+                .ease(d3.easeLinear)
+            .transition()
+                .duration(300)
+                    .attr("y", function(d) { return y(d.y) })
+                    .attr("height", function(d) { return y(d.end_athlete)-y(d.y)+y.bandwidth()})
+                    .ease(d3.easeLinear)
 
 
     })
