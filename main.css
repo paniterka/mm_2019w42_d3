@@ -76,6 +76,8 @@ h2{
 
 .story_step:last-of-type{
   border-bottom: 1px solid black; 
+  margin-bottom: 250px;
+
 }
 
 .story_step p{
