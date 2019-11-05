@@ -150,7 +150,7 @@ d3.csv("athletes_year_f2.csv", function(data) {
     svg.selectAll("*")
         .style("opacity", 0.0)
         .transition()
-            .duration(1000)
+            .duration(750)
             .style("opacity", 1)
 
 }
